@@ -1,0 +1,204 @@
+.buttoncourseseach{
+    margin-bottom: 20px !important;
+    position: relative;
+    
+
+}
+.buttoncourseseach .course_suggess_search{
+    position: absolute;
+    margin-left: 1px;
+    width: 83%;
+
+}
+.buttoncourseseach .course_suggess_search div{
+    width: 100%;
+    z-index: 9999;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    color : gray;
+}
+
+.buttoncourseseach .course_suggess_search div:hover
+{
+    background: #3B8AEB;
+    color : white;
+}
+
+.Bnaner-course-detail{
+    background-image: url("../images/breadcrumb-bg.jpg");
+    padding-top: 80px !important;
+}
+.detail-image-review{
+    list-style: none;
+}
+.detail-image-review li{
+    margin-left: 20px;
+    width: 19%;
+}
+.detail-image-review li:nth-child(1){
+    margin-left: -19px !important;
+}
+.detail-image-review li .ant-image-img {
+    width: 60% !important;
+    height: 100px !important;
+}
+
+.ant-card{
+    box-shadow: #88a5bf7a 6px 2px 16px, #fffc -6px -2px 16px !important;
+}
+
+.activebuttonanswer{
+    background : #0099FF !important;
+}
+
+.wrongbuttonanswer{
+    background: red !important;
+}
+.lackbuttonanswer{
+    background: gray !important;
+}
+.background-color-All {
+    border: 1px solid white;
+    background: #30C2EC !important;
+    color : white !important;
+}
+.buttoncourseseach button{
+    background: #30C2EC !important;
+     color: white !important;
+}     
+
+.color-all{
+    color: #30C2EC !important
+}
+
+.background-all{
+    background: #30C2EC !important;
+}
+.form-check-label{
+    
+}
+.color-gray{
+    color : #687687 !important
+}
+.a{
+    text-decoration: none;
+
+}
+
+.phissheaderright .rounded-pill{
+    background: white !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+.phissheaderright .rounded-pill .icon{
+    color: #30C2EC;
+    font-size: 15px;
+}
+.phicssdetailcoursesocial a{
+    background: #30C2EC !important;
+
+}
+.phisstab_detail_course .ant-tabs-tab{
+    background: white !important;
+     color: #30C2EC !important;
+     padding: 10px 15px 10px 15px;
+     border-radius: 20px;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+     border: 1px solid #30C2EC;
+}
+
+.phisstab_detail_course .ant-tabs-tab.ant-tabs-tab-active {
+    background: #30C2EC !important;
+    color: white !important;
+
+}
+.phisstab_detail_course .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+    color: white !important;
+}
+:where(.css-dev-only-do-not-override-1hpnbz2).ant-tabs .ant-tabs-ink-bar{
+    background: none !important;
+}
+.phisstab_detail_course .ant-tabs-nav{
+    margin-bottom: 50px;
+}
+
+.phicss_collapse_detailcourse .ant-collapse-item{
+    background: white !important;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    border: 1px solid white;
+}
+
+.phicss_collapse_detailcourse .ant-collapse-header {
+    color: #30C2EC !important;
+}
+.phicss_collapse_detailcourse .course-content{
+    color : #687687 !important
+}
+
+.ant-pagination-item{
+    background: #30C2EC !important;
+    color: white !important;
+    border: 1px solid white !important;
+}
+.ant-pagination-item.ant-pagination-item-active{
+    background: white !important;
+    color: #30C2EC !important;
+    border: 1px solid #30C2EC !important;
+}
+.ant-pagination-item-link{
+    color: #30C2EC !important;
+}
+.ant-btn-color-primary{
+    background: #30C2EC !important;
+    color : white !important;
+}
+.btn{
+    background: #30C2EC !important;
+    color : white !important;
+    border: 1px solid white;
+}
+.ant-btn{
+    background: #30C2EC !important;
+    color : white !important;
+    border: 1px solid white;
+}
+.ant-btn:hover{
+    background: white !important;
+    color: #30C2EC !important;
+    border: 1px solid #30C2EC !important;
+}
+.ant-picker-range{
+    border: 2px solid #30C2EC !important;
+}
+
+.phicss_detail_Mycourse .ant-card-head-title{
+    color : #30C2EC !important;
+}
+.phicss_detail_Mycourse .ant-card-body a{
+    color : #687687 !important
+}
+
+.custom-btn{
+    background: white !important;
+    color: #30C2EC !important;
+    border: 1px solid #30C2EC !important;
+}
+.custom-btn:hover{
+    background: #30C2EC !important;
+    color : white !important;
+    border: 1px solid white;
+}
+.phicssmaterial .ant-collapse-expand-icon{
+    color : #30C2EC !important;
+}
+.phicssmaterial .ant-collapse-header-text{
+    color:  #30C2EC;
+}
+.phicssmaterial .ant-collapse-item{
+    background: white !important;
+}
+.swiper-pagination-bullet{
+    background: #30C2EC !important; 
+}
