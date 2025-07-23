@@ -2,20 +2,18 @@ import { useParams,useNavigate } from "react-router-dom";
 import { Button, Form, Input, Row, Col, Card, Select, Upload, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { Uploadlist } from "../../../../../Components/helper/UploadImg";
-import { PostMaterial,GetAllMaterial } from "../../../../../service/Material";
-import { useSelector } from 'react-redux';
-import { selectUser } from "../../../../../Redux/user";
-import Swal from 'sweetalert2';
+import { PostMaterial,GetAllMaterial, Postchild } from "../../../../../service/Material";
+import { AlertSuccess } from "../../../../../Components/Components/Alert";
+import handle_error from "../../../../../Components/helper/handle_error";
 
 function AddchildMaterial() {
     const { id } = useParams();
-    const token = useSelector(selectUser);
     const [Parent,setParent] = useState()
     const [fileList, setFileList] = useState([]);
     const navigate = useNavigate()
 
     const FetchAPI = async() => {
-         const respond = await GetAllMaterial("Getall",{key : id},token)
+         const respond = await GetAllMaterial(id)
          if(respond.status == true){
             const newdata = respond.data.map((item) => {
                 return (
@@ -27,31 +25,28 @@ function AddchildMaterial() {
             })
             setParent(newdata)
          }
+         handle_error(respond,navigate)
+
     }
     const handle_Submit_form_create_course = async (values) => {
         values.file = await Uploadlist(fileList);
-
-        const respond = await PostMaterial("PostChild", values, token);
+        const respond = await Postchild(values);
         if(respond.status == true){
-            Swal.fire({
-                icon: "success",
-                title: "Add Success",
-                showConfirmButton: false,
-                timer: 1000
-              });
+           AlertSuccess("Add successed")
            setTimeout(() => {
             navigate(`/Mycourse/material/${id}`)
            }, 1000);
         }
+        handle_error(respond,navigate)
     };
 
     const onChange_Image_add_material = async ({ fileList: newFileList, file }) => {
-        const isPdf = file.type === 'application/pdf'; // Kiểm tra loại file
+        const isPdf = file.type === 'application/pdf'; 
     if (!isPdf) {
         message.error('You can only upload PDF files!');
-        setFileList([]); // Xóa danh sách nếu file không hợp lệ
+        setFileList([]); 
     } else {
-        setFileList(newFileList); // Cập nhật danh sách file nếu hợp lệ
+        setFileList(newFileList); 
     }
     };
 
@@ -62,7 +57,7 @@ function AddchildMaterial() {
     return (
         Parent != null &&  <div className="shopping-area pt-100 pb-60">
         <div className="container text-center">
-            <Card title="Add Your Assignment"
+            <Card title="Add Your Material"
                 bordered={true}
                 style={{
                     width: '100%',

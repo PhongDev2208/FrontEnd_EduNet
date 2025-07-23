@@ -1,32 +1,26 @@
 import { GetData,PostData,PatchData } from "../Utils/request";
 
-export const GetMycourse_course = async (path,option = {key : ''},token) => {
-  if(option.key == null){
-    option.key = ''
-   }
-  const data = await GetData(`stcourse/GetCourse?key=${option.key}`,token)
+export const GetMycourse_course = async () => {
+  const data = await GetData(`stcourse/Getstudentcourse`)
   return data
 }
 
-export const GetMycourse_Student = async(option = {key : ' '} , token) => {
-  if(option.key == null){
-    option.key = ''
-   }
-  const data = await GetData(`stcourse/GetStudent?key=${option.key}`,token)
+export const GetMycourse_Student = async(id) => {
+  const data = await GetData(`stcourse/GetStudent/${id}`)
   return data
 }
 
-export const PostStucourse = async(option,token) => {
-   const Request = await PostData(`stcourse`,option,token)
-   return Request
-}
-
-export const EditStatusCourse = async(option,token) => {
-  const Request = await PatchData(`stcourse/editstatus`,option,token)
+export const GetScheduleStudent = async() => {
+  const Request = await GetData(`stcourse/GetscheduleStudent`)
   return Request
 }
 
-export const GetScheduleStudent = async(option,token) => {
-  const Request = await GetData(`stcourse/GetscheduleStudent`,token)
+export const PostStucourse = async(option) => {
+   const Request = await PostData(`stcourse/registerstudencourse`,option)
+   return Request
+}
+
+export const EditStatusCourse = async(option) => {
+  const Request = await PatchData(`stcourse/editstatus`,option)
   return Request
 }

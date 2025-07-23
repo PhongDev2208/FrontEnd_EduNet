@@ -2,38 +2,28 @@ import { useParams,useNavigate } from "react-router-dom";
 import { Button, Form, Input, Row, Col, Card } from 'antd';
 import { useEffect, useState } from 'react';
 import { PostMaterial } from "../../../../../service/Material";
-import MyEditor from "../../../../../Components/Components/tinymce"
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from "../../../../../Redux/user";
-import Swal from 'sweetalert2';
-
+import { AlertSuccess } from "../../../../../Components/Components/Alert";
+import handle_error from "../../../../../Components/helper/handle_error";
 function AddMaterial() {
     const { id } = useParams()
-    const token = useSelector(selectUser)
     const navigate = useNavigate()
-
-
     const handle_Submit_form_create_course = async (values) => {
         values.course_id = id
-        const respond = await PostMaterial("Post",values,token)
-        console.log(respond)
+        const respond = await PostMaterial(values)
         if(respond.status == true){
-            Swal.fire({
-                icon: "success",
-                title: "Add Success",
-                showConfirmButton: false,
-                timer: 1000
-              });
+           AlertSuccess("Add Succced")
            setTimeout(() => {
             navigate(`/Mycourse/material/${id}`)
            }, 1000);
         }
+        handle_error(respond,navigate)
+
     }
 
   return (
     <div className="shopping-area pt-100 pb-60">
     <div className="container text-center">
-        <Card title="Add Your Assignment"
+        <Card title="Add Your Material"
             bordered={true}
             style={{
                 width: '100%',

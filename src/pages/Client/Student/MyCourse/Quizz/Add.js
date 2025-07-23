@@ -5,20 +5,19 @@ import { selectUser, selectRole } from '../../../../../Redux/user';
 import { PostQuestion } from '../../../../../service/Question';
 import { Button, Select, Checkbox, Form, Input, Row, Col, Card, Upload, DatePicker, Space } from 'antd';
 import Swal from 'sweetalert2';
+import handle_error from '../../../../../Components/helper/handle_error';
+import { AlertSuccess } from '../../../../../Components/Components/Alert';
 
 const { TextArea } = Input;
 
 function AddQuizz() {
     const [question, setQuestion] = useState('');
-    const token = useSelector(selectUser)
-    const role = useSelector(selectRole)
     const { id } = useParams();
     const navigate = useNavigate()
 
     const Handle_data_question = async(e) => {
-
-        const value = e.target.value; // lấy giá trị từ TextArea
-        setQuestion(value); // lưu giá trị vào state (nếu cần)
+        const value = e.target.value; 
+        setQuestion(value); 
     }
     const handle_Submit_form_create_course = async (values) => {
         const splitQuestion = question.split("***");
@@ -52,16 +51,12 @@ function AddQuizz() {
         }) 
         values.course_id = id
         values.question = customQuestion
-        const respond = await PostQuestion("post",values,token)
+        const respond = await PostQuestion(values)
         if(respond.status == true){
-            Swal.fire({
-                icon: "success",
-                title: "Add Success",
-                showConfirmButton: false,
-                timer: 1000
-              });
+              AlertSuccess("Add successed")
               navigate(`/Mycourse/quizz/${id}`)
         }
+        handle_error(respond,navigate)
     }
     return (
         <div className="shopping-area pt-100 pb-60">

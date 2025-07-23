@@ -1,18 +1,16 @@
 import { Uploadlist } from "../../../../Components/helper/UploadImg"
 import { PostCourse } from "../../../../service/Course"
 import { GetAllCategories } from "../../../../service/Categories";
-import { selectUser } from '../../../../Redux/user';
-import { useNavigate, Link } from "react-router-dom"
-import { Button, Select, Checkbox, Form, Input, Row, Col, Card, Upload, DatePicker, Space } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom"
+import { Button, Select, Form, Input, Row, Col, Card, Upload, DatePicker, Space } from 'antd';
 import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
 import MyEditor from "../../../../Components/Components/tinymce"
+import { AlertSuccess } from "../../../../Components/Components/Alert";
+import handle_error from "../../../../Components/helper/handle_error";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 function AddMycourse() {
-    const token = useSelector(selectUser)
     const [fileList, setFileList] = useState([]);
     const [content, setcontent] = useState("");
     const [goal, setgoal] = useState("");
@@ -72,7 +70,6 @@ function AddMycourse() {
         const schedulesplit = schedule.split("***")
         const newschedule = schedulesplit.map((item) => {
            const splititem = item.split("\n")
-           console.log(splititem)
            let check = false;
            let tmp = {
             title : null,
@@ -105,16 +102,12 @@ function AddMycourse() {
         values.goal = goal
         values.schedule = newschedule
         values.img = await Uploadlist(fileList);
-        const respond = await PostCourse(values, token)
+        const respond = await PostCourse(values)
         if(respond.status == true){
-            Swal.fire({
-                icon: "success",
-                title: "Add Success",
-                showConfirmButton: false,
-                timer: 1000
-              });
+              AlertSuccess("Add successed")
               navigate("/mycourse")
         }
+        handle_error(respond,navigate)
     }
     const onChange_Image_add_mycourse = async ({ fileList: newFileList }) => {
         setFileList(newFileList);

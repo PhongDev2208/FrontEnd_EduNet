@@ -1,20 +1,19 @@
+import "../../../Styles/home/css/styleprivate.css"
 import { useParams } from 'react-router-dom';
-import { Tabs, Collapse } from 'antd';
 import { PostStucourse } from '../../../service/Stucourse';
-import { GetAllCourse } from '../../../service/Course';
-import { Button, Form, Input, Rate, Upload, Card, List, Image, Pagination } from 'antd';
+import { Getdetailcourse } from '../../../service/Course';
+import { Button, Form, Input, Rate, Upload, Image, Pagination ,Tabs, Collapse } from 'antd';
 import { useEffect, useState } from 'react';
 import { PostReview, GetAllReview } from '../../../service/Review.';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { getCookie } from "../../../Components/helper/cookie";
-import "../../../Styles/home/css/styleprivate.css"
 import { Uploadlist } from "../../../Components/helper/UploadImg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTelegram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faClock, faStar } from '@fortawesome/free-solid-svg-icons';
 import Seturl from "../../../Components/helper/SetURL"
-import Swal from 'sweetalert2';
+import { AlertSuccess } from "../../../Components/Components/Alert";
+import handle_error from "../../../Components/helper/handle_error";
 function Detail() {
     const [Data, setdata] = useState([]);
     const [itemcollapse, setitemcollapse] = useState([])
@@ -23,17 +22,15 @@ function Detail() {
     const { id } = useParams();
     const navigate = useNavigate()
     const fetchAPI = async () => {
-        const searchParams = new URLSearchParams(window.location.search);
-        let page = searchParams.get('page');
-
         const [dataReview, dataDetail] = await Promise.all([
-            GetAllReview({ key: id, page: page }, null),
-            GetAllCourse("Getdetailcourse", { key: id }, null)
+            GetAllReview(id),
+            Getdetailcourse(id)
         ]);
-        if (dataReview.status == true) {
+        console.log(dataReview)
+        if (dataReview.status == true && Array.isArray(dataReview.data)) {
             setdata(dataReview)
         }
-        if (dataDetail.status == true) {
+        if (dataDetail.status == true && dataDetail.data) {
             setDataDetailcourse(dataDetail.data)
             if (Array.isArray(dataDetail.data.schedule)) {
                 const tmp = dataDetail.data.schedule.map((item, index) => {
@@ -71,72 +68,35 @@ function Detail() {
     useEffect(() => {
         fetchAPI()
     }, [])
+
     const handle_tabs_course_Detail = (key) => {
     };
 
     const onChange = async ({ fileList: newFileList }) => {
         setFileList(newFileList);
-
     };
 
     const handle_submit_review = async (values) => {
-        const token = getCookie("token");
-        if (!token) {
-            navigate("auth/login");
-        }
         if (fileList.length > 0) {
             values.images = await Uploadlist(fileList)
         }
         values.course_id = id
-        const respond = await PostReview(values, token)
+        const respond = await PostReview(values)
         if (respond) {
-            Swal.fire({
-                icon: "success",
-                title: "Review Successful",
-                showConfirmButton: false,
-                timer: 1000
-            });
+            AlertSuccess("Review Successful")
             fetchAPI()
             setFileList([])
         }
+        handle_error(respond,navigate)
 
     };
     const handle_register_course_detail = async (id_course) => {
-        const token = getCookie("token");
-        if (!token) {
-            navigate("/login");
-        }
-        const data = await PostStucourse({ course_id: id_course }, token)
-        if (data.error == 200) {
-            Swal.fire({
-                icon: "error",
-                title: "Register Failed",
-                showConfirmButton: false,
-                timer: 1500
-              });
-        }
-        if (data.error == 100) {
-            navigate("/login")
-        }
-        if(data.error == 300){
-            Swal.fire({
-                icon: "error",
-                title: "My schedule is overlapping.",
-                showConfirmButton: false,
-                timer: 1500
-              });
-        }
-        if (data.status == true) {
-            Swal.fire({
-                icon: "success",
-                title: "Review Successful",
-                showConfirmButton: false,
-                timer: 1000
-            });
-          
+        const respond = await PostStucourse({ course_id: id_course })
+        if (respond.status == true) {
+            AlertSuccess("Đăng Kí Thành Công")
             navigate("/Mycourse");
-
         }
+        handle_error(respond,navigate)
     }
 
     const handlePageChange = (e) => {
@@ -452,8 +412,8 @@ function Detail() {
 
                                 </figure>
                                 <div className="course-price mt-15" style={{ textAlign: "center" }}>
-                                    <h4 className="color-all new-price" style={{ fontSize: "22px" }}>{DataDetailCourse.price}</h4>
-                                    <h4 className="color-gray new-price prev-price" style={{ fontSize: "20px" }}>3.888 $</h4>
+                                    <h4 className="color-all new-price" style={{ fontSize: "22px" }}>{DataDetailCourse.price.toLocaleString('vi-VN')} VNĐ                                   </h4>
+                                    <h4 className="color-gray new-price prev-price" style={{ fontSize: "20px" }}>4.000.000 VNĐ</h4>
 
                                 </div>
                                 <div className="btn-groups mt-15">
@@ -521,7 +481,6 @@ function Detail() {
                                 </div>
                             </div>
                         </aside>
-                        {/* Spacer */}
                         <div className="pb-40" />
                     </div>
                 </div>

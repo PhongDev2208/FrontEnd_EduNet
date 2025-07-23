@@ -65,39 +65,14 @@ function Header() {
                     <ul id="mainMenu" className="navbar-nav mobile-item mx-auto">
                       <li className="nav-item">
                         <a href="/" style={{color : "#30C2EC"}} className="nav-link toggle">Home <i className="fal fa-plus" /></a>
-                        {/* <ul className="menu-dropdown">
-                     <li className="nav-item">
-                       <a className="nav-link" href="index.html">Home Demo 1</a>
-                     </li>
-                     <li className="nav-item">
-                       <a className="nav-link" href="index-2.html">Home Demo 2</a>
-                     </li>
-                     <li className="nav-item">
-                       <a className="nav-link" href="index-3.html">Home Demo 3</a>
-                     </li>
-                   </ul> */}
                       </li>
                       <li className="nav-item">
                         <a href="/course" style={{color : "#30C2EC"}} className="nav-link toggle">Courses <i className="fal fa-plus" /></a>
-                        {/* <ul className="menu-dropdown">
-                     <li className="nav-item">
-                       <a className="nav-link" href="courses.html">Course</a>
-                     </li>
-                     <li className="nav-item">
-                       <a className="nav-link" href="course-details.html">Course Details</a>
-                     </li>
-                   </ul> */}
+ 
                       </li>
                       <li className="nav-item">
                         <a href="/Mycourse" style={{color : "#30C2EC"}} className="nav-link toggle">MyCourse <i className="fal fa-plus" /></a>
-                        {/* <ul className="menu-dropdown">
-                     <li className="nav-item">
-                       <a className="nav-link" href="mentors.html">Mentors</a>
-                     </li>
-                     <li className="nav-item">
-                       <a className="nav-link" href="mentor-details.html">Mentor Details</a>
-                     </li>
-                   </ul> */}
+                      
                       </li>
                       <li className="nav-item">
                         <a className="nav-link toggle" style={{color : "#30C2EC"}} href="/schedule">Schedule <i className="fal fa-plus" /></a>

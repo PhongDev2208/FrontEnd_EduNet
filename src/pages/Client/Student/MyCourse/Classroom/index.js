@@ -1,22 +1,23 @@
 import { Card, Input, Col, Row, Table, Button, Form } from 'antd';
 import { GetMycourse_Student,EditStatusCourse } from "../../../../../service/Stucourse"
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUser,selectRole } from "../../../../../Redux/user";
-import { useParams, Link } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { useParams, Link,useNavigate } from "react-router-dom";
+import handle_error from '../../../../../Components/helper/handle_error';
 
 function ClassRoom() {
     const { id } = useParams()
     const token = useSelector(selectUser)
     const role = useSelector(selectRole)
+    const navigate = useNavigate()
     const [Data_Mycourse_Student, Set_Data_Mycourse_student] = useState(null)
     const columns = [
         {
             title: 'STT',
             dataIndex: 'stt',
-            align: 'center', // Căn giữa nội dung trong các cột
-            width: 'auto',   // Để các cột tự động căn đều
+            align: 'center', 
+            width: 'auto',  
         },
         {
             title: 'Name',
@@ -50,22 +51,15 @@ function ClassRoom() {
     ];
  
    const handle_status_mycourse =async (e) => {
-        const respond = await EditStatusCourse({id : e},token)
+        const respond = await EditStatusCourse({id : e})
         if(respond.status == true){
             fetchAPI()
-        }else{
-            Swal.fire({
-                icon: "error",
-                title: "There was an error",
-                showConfirmButton: false,
-                timer: 1500
-              });
         }
+        handle_error(respond,navigate)
    }
     const fetchAPI = async () => {
-        const Respond = await GetMycourse_Student({ key: id }, token);
-        console.log(Respond)
-        if (Respond.status == true && Respond.data.length > 0) {
+        const Respond = await GetMycourse_Student(id );
+        if (Respond.status == true && Array.isArray(Respond.data)) {
             const New_Data_Custom = Respond.data.map((item, index) => {
                 return (
                     {
@@ -75,13 +69,14 @@ function ClassRoom() {
                         Phone: item.phone,
                         email: item.email,
                         Status :role === "tea" &&
-                        ( item.status == 0 ? ( <Button className='custom-btn' onClick={() => handle_status_mycourse(item._id)}>Not reviewed</Button>) : ( <Button onClick={() => handle_status_mycourse(item._id)}>Reviewed</Button>)                    )
+                        ( item.status == 1 ? ( <Button className='custom-btn' onClick={() => handle_status_mycourse(item._id)}>Not reviewed</Button>) : ( <Button onClick={() => handle_status_mycourse(item._id)}>Reviewed</Button>)                    )
                      }
                 )
             })
             Set_Data_Mycourse_student(New_Data_Custom)
 
         }
+        handle_error(Respond,navigate)
     }
 
     useEffect(() => {

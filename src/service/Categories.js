@@ -1,6 +1,6 @@
 import { GetData } from "../Utils/request";
 
-export const GetAllCategories = async (path) => {
-  const data = await GetData(`categories/${path}`)
+export const GetAllCategories = async () => {
+  const data = await GetData(`categories/GetAll`)
   return data
 }

@@ -1,25 +1,22 @@
 import homepass1 from "../../../Styles/home/images/hero-banner-2.png"
-import homepass3 from "../../../Styles/home/images/video-banner-3.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faPenToSquare, faClock, faBookOpen, faMoneyBillWave, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faBookOpen, faMoneyBillWave, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { GetAllCategories } from "../../../service/Categories";
+import { GetAllCourse } from "../../../service/Course"
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { GetAllCategories } from "../../../service/Categories";
-import { GetAllCourse } from "../../../service/Course"
-// import Swiper styles
 function Home() {
   const [data, setdata] = useState([]);
   const [Datacourse, setDatacourse] = useState([]);
   const fetchAPI = async () => {
-    const newdata = await GetAllCategories("GetAll");
-    const newdatacourse = await GetAllCourse("getall", {}, null);
+    const newdata = await GetAllCategories();
+    const newdatacourse = await GetAllCourse();
     setdata(newdata.data);
-    console.log(newdatacourse.data)
     setDatacourse(newdatacourse.data)
   }
   useEffect(() => {

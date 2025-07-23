@@ -1,12 +1,8 @@
-import { GetData,PostData } from "../Utils/request";
+import { GetData } from "../Utils/request";
 
-export const GetAllTopic = async (option = null,token) => {
+export const GetAllTopic = async (id) => {
 
-  const data = await GetData(`topic/getall/?key=${option.key}`,token)
+  const data = await GetData(`Topic/GetAll/${id}`)
   return data
 }
 
-export const PostTopic = async(option,token) => {
-   const Request = await PostData(`stcourse`,option,token)
-   return Request
-}

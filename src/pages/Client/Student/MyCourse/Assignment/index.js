@@ -1,13 +1,12 @@
 import { Card, Col, Row ,Table,Button} from 'antd';
 import { useEffect, useState} from 'react';
 import { GetAllAssignment } from '../../../../../service/Assignment';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser,selectRole } from "../../../../../Redux/user";
+import { useSelector } from 'react-redux';
+import { selectRole } from "../../../../../Redux/user";
 import{Link , useParams} from "react-router-dom"
 
 function Assignment() {
     const { id } = useParams()
-    const token = useSelector(selectUser)
     const role = useSelector(selectRole)
 
     const [newdata,setnewdata] = useState()
@@ -41,8 +40,8 @@ function Assignment() {
           }] : []), 
     ];
     const FetchAPI = async() => {
-          const respond = await GetAllAssignment(`Getall/${id}`,{},token)
-          if(respond.status == true){
+          const respond = await GetAllAssignment(id)
+          if(respond.status == true && Array.isArray(respond.data)){
              const newdata = respond.data.map((item,index) => {
                  return(
                     {
@@ -78,7 +77,6 @@ function Assignment() {
                         <Card title="Your Assignment" bordered={false}>
                          {role == "tea" &&  <div style={{ textAlign : "right", marginBottom: "30px" }}>
                             <Button type="primary" style={{ marginRight : "10px" }} ><Link style={{ textDecoration: 'none'  }} to={`/Mycourse/Assignment/add/${id}`}>Add</Link></Button>
-
                         </div>
 }
                           <Table columns={columns} dataSource={newdata} />

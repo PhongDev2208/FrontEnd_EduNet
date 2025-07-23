@@ -2,10 +2,9 @@ import { Link, useNavigate } from "react-router-dom"
 import { Steps, Tabs } from 'antd';
 import { act, useState } from "react";
 import { Flex, Input, Typography, Select } from 'antd';
-import { GetAllUser, PostUser } from "../../../service/User";
+import { ConfirmOTP, Poststudent } from "../../../service/User";
 import { setCookie, getCookie } from "../../../Components/helper/cookie";
 import Swal from 'sweetalert2';
-// or via CommonJS
 function RegisterStudent() {
     const navigate = useNavigate()
     const [active, setactive] = useState(parseInt(1))
@@ -36,10 +35,9 @@ function RegisterStudent() {
               console.log("đã chay vao day")
               return ;
         } 
-            const Respond = await PostUser("Post", data, null)
+            const Respond = await Poststudent(data)
             if (Respond.status == true) {
                 setactive(active + 1)
-                setCookie("token", Respond.data[0].token)
                 Swal.fire({
                     icon: "success",
                     title: "Register Success",
@@ -73,8 +71,7 @@ function RegisterStudent() {
         }
     }
     const handle_submit_otp_register = async (e) => {
-        const token = getCookie("token")
-        const Respond = await PostUser("confirmOTP", { otp: saveOTP }, token)
+        const Respond = await ConfirmOTP({ otp: saveOTP })
         console.log(Respond)
         if (Respond.status == true) {
             Swal.fire({

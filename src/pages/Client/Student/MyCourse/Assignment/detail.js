@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from "../../../../../Redux/user";
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import {GetAllAssignment} from "../../../../../service/Assignment"
+import {GetAllAssignment, GetdetailAssignment} from "../../../../../service/Assignment"
 import { PostSubmit } from '../../../../../service/submit';
 import { useNavigate, Link } from "react-router-dom"
 
 import Swal from 'sweetalert2';
+import { AlertSuccess } from '../../../../../Components/Components/Alert';
 
 function DetailAssignment() {
     const { id ,idas} = useParams()
@@ -18,7 +19,7 @@ function DetailAssignment() {
     const navigate = useNavigate()
 
     const FetchAPI = async() => {
-        const Respond = await GetAllAssignment(`Getdetail/${idas}`,{},token)
+        const Respond = await GetdetailAssignment(idas)
         console.log(Respond)
         if(Respond.status == true){
             setnewdata(Respond.data)
@@ -27,14 +28,9 @@ function DetailAssignment() {
     const handle_Mycourse_submit_Assignment = async(data) => {
         data.content = content
         data.assignment_id = idas
-        const respond = await PostSubmit("post",data, token)
+        const respond = await PostSubmit(data)
         if(respond.status == true){
-            Swal.fire({
-                icon: "success",
-                title: "Add Success",
-                showConfirmButton: false,
-                timer: 1000
-              });
+              AlertSuccess("Add Successed")
               navigate(`/Mycourse/Assignment/index/${id}`)
         }
     }

@@ -1,13 +1,11 @@
 import { GetData,PostData } from "../Utils/request";
 
-export const GetAllQuestion = async (option = null,token) => {
-
-  const data = await GetData(`question/getall/?key=${option.key}`,token)
+export const GetAllQuestion = async (id) => {
+  const data = await GetData(`question/GetAll/${id}`)
   return data
 }
 
-export const PostQuestion = async(path,option,token) => {
-   console.log(path,option,token)
-   const Request = await PostData(`question/${path}`,option,token)
+export const PostQuestion = async(option) => {
+   const Request = await PostData(`question/post`,option)
    return Request
 }

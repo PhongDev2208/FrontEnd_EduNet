@@ -1,83 +1,38 @@
-import { useState, useEffect } from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faPenToSquare, faClock ,faBookOpen,faMoneyBillWave,faCalendar} from '@fortawesome/free-solid-svg-icons';
-import { GetAllCourse } from "../../../service/Course"
-import { Input } from 'antd';
-import { Link  } from 'react-router-dom';
-import { Pagination } from 'antd';
 import "../../../Styles/home/css/styleprivate.css"
 import Seturl from "../../../Components/helper/SetURL"
-import { Color } from "antd/es/color-picker";
+import PaginationCustom from "../../../Components/Components/panigation";
+import Handleerror from "../../../Components/helper/handle_error"
+import { useState, useEffect } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock ,faBookOpen,faMoneyBillWave,faCalendar} from '@fortawesome/free-solid-svg-icons';
+import { GetAllCourse } from "../../../service/Course"
+import { Input } from 'antd';
+import { Link ,useNavigate } from 'react-router-dom';
 
 const { Search } = Input;
 function Course() {
     const [dataCouse, setdatacourse] = useState([]);
-    const [datasugess, setdatasugess] = useState([]);
-    const [inputsearch , setinput] = useState(null)
-    const [currentpage, setcurrentpage] = useState({
-        start : 1,
-        total : 1,
-    })
-    const option = {
-    }
-    const sugess = {
-
-    }
-    const fetchAPI = async (type) => {
-       switch (type){
-        case 1 : 
-           const searchParams = new URLSearchParams(window.location.search);
-           option.key = searchParams.get('key');
-           option.limit = 9;
-           option.page = searchParams.get('page')
-           const dataCFectch = await GetAllCourse("getall",option,null)
-           console.log(dataCFectch.data)
-
-           if(dataCFectch.data){
-              setdatacourse(dataCFectch.data) 
-               setcurrentpage({
-                 start : dataCFectch.pagination.start,
-                 total : dataCFectch.pagination.count
-            })
+    const [currentpage, setcurrentpage] = useState(1)
+    const navigate = useNavigate()
+    const fetchAPI = async () => {
+           const respond = await GetAllCourse()
+           if(respond.status == true && Array.isArray(respond.data)){
+               setdatacourse(respond.data) 
+               setcurrentpage(respond.pagination)    
+               Handleerror(respond,navigate)                                                          
            }
-           break; 
-        case 2 : 
-           sugess.limit = 5;
-           const DataSugess = await GetAllCourse("getall",sugess,null);
-            setdatasugess(DataSugess.data) 
-           break; 
-    
-       }
+      
     }
-
     useEffect(() => {
-        fetchAPI(1);
+        fetchAPI();
     },[])
     
     const onSearchinput = (value, _e, info) =>{
         Seturl({title : 'key' , value : value})
         Seturl({title : 'page' , value : 1})
-        fetchAPI(1);
+        fetchAPI();
     }
-    const onChangeinput = (e) => {
-        setinput(e.target.value);
-        sugess.key = e.target.value
-        if(sugess.key.length > 0){
-            fetchAPI(2); 
-        }
-        else{
-            setdatasugess([])
-        }
-    }
-
-    const handle_suggess_search = (e) => {
-        setinput(e)
-        onSearchinput(e)
-    }
-    const handle_pagination = (e) => {
-        Seturl({title : "page" , value : e})
-        fetchAPI(1)
-    }
+  
     return (
         <div className="course-area pt-60 pb-75">
             <div className="container">
@@ -194,18 +149,8 @@ function Course() {
                                 </div>
                                
                                 <div className="col-5 buttoncourseseach" >
-                                    <Search className=""  placeholder="input search text"  value={inputsearch} onChange={onChangeinput} onSearch={onSearchinput} enterButton />
-                                    <div className="row course_suggess_search">
-                                        {datasugess.length > 0 && (
-                                            datasugess.map((item,index) => {
-                                                return (
-                                                    <div key={index} onClick={() => handle_suggess_search(item.title)} className="col-12 ps-4">{item.title}</div>                                        
-                                                )
-                                            })
-                                        )}
-
-                                    </div>
-
+                                    <Search className=""  placeholder="input search text"   onSearch={onSearchinput} enterButton />
+                                    
                                 </div>
                             </div>
                         </div>
@@ -252,9 +197,9 @@ function Course() {
                                     )
                                 })
                             )}
+                       <PaginationCustom fetchAPI={fetchAPI} total={currentpage}/>
 
                         </div>
-                        <Pagination current={currentpage.start} align="center" onChange={handle_pagination} total={currentpage.total * 10} />;
                     </div>
                 </div>
             </div>

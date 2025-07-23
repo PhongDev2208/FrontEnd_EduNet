@@ -1,14 +1,26 @@
 import { GetData,PostData } from "../Utils/request";
 
-export const GetAllUser = async (path,option = null,token) => {
-  const data = await GetData(`user/${path}`,token)
+export const Getdetail = async () => {
+  const data = await GetData(`User/Getdetail`)
   return data
 }
 
-export const PostUser = async(path,option,token) => {
-   console.log(path)
-   const Request = await PostData(`user/${path}`,option,token)
+export const Poststudent = async(option) => {
+   const Request = await PostData(`User/Post/student`,option)
    return Request
 }
 
+export const PostTeacher = async(option) => {
+  const Request = await PostData(`User/Post/teacher`,option)
+  return Request
+}
 
+export const PostLogin = async(option) => {
+  const Request = await PostData(`User/login`,option)
+  return Request
+}
+
+export const ConfirmOTP = async(option) => {
+  const Request = await PostData(`User/confirmOTP`,option)
+  return Request
+}

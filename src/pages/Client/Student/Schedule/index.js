@@ -1,7 +1,7 @@
 import { Badge, Modal,Calendar ,Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { GetAllCourse } from '../../../../service/Course';
+import { GetAllCourse, GetSchedule } from '../../../../service/Course';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser,selectRole } from "../../../../Redux/user";
 import { GetScheduleStudent } from '../../../../service/Stucourse';
@@ -43,17 +43,16 @@ const generateSchedule = (scheduleData) => {
     return schedule;
 };
 function Schedule() {
-    const token = useSelector(selectUser)
     const role = useSelector(selectRole)
 
     const [DataSchedule,setDataSchedule] = useState([])
     const FetchAPI = async() => {
         let respond = null
         if(role == "tea") {
-            respond = await GetAllCourse("GetSchedule", {}, token)
+            respond = await GetSchedule()
         }
         else{
-            respond = await GetScheduleStudent({},token);
+            respond = await GetScheduleStudent();
 
         }
         const finalSchedule = generateSchedule(respond.data);

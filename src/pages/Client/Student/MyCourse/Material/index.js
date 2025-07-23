@@ -1,6 +1,6 @@
 import { Table, Card, Button, Flex, DatePicker, Input, Select, Collapse } from 'antd';
 import { GetAllMaterial } from '../../../../../service/Material';
-import { faXmark, faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link, useParams } from 'react-router-dom';
@@ -9,14 +9,12 @@ import { selectUser, selectRole } from '../../../../../Redux/user';
 import { useEffect, useState } from 'react';
 function Material() {
     const { id } = useParams()
-    const token = useSelector(selectUser);
     const role = useSelector(selectRole)
     const [DataMaterial, SetDataMaterial] = useState(null)
-
     const FetchAPI = async () => {
-        const Respond = await GetAllMaterial("Getall", { key: id }, token)
+        const Respond = await GetAllMaterial(id)
+        console.log(Respond)
         if (Respond.status == true) {
-
             SetDataMaterial(Respond.data)
         }
     }

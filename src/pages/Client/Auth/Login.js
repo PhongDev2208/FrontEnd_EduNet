@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { PostAccount } from '../../../service/Login';
+import { PostLogin } from '../../../service/User';
 import { setCookie } from '../../../Components/helper/cookie';
 import { Alert, Button, Space } from 'antd';
 import { Link, useNavigate } from "react-router-dom"
@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 
 function Login() {
   const navigate = useNavigate()
-  const dispatch = useDispatch();
 
   const handle_Submit_form_login = async (e) => {
     e.preventDefault();
@@ -17,10 +16,8 @@ function Login() {
       email: e.target.email.value,
       password: e.target.password.value
     }
-    const respond = await PostAccount(data)
-    console.log(respond)
+    const respond = await PostLogin(data)
     if (respond.status) {
-      setCookie("token", respond.data, 1)
       Swal.fire({
         icon: "success",
         title: "Login Success",

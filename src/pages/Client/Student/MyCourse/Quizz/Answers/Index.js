@@ -25,7 +25,7 @@ function Answer() {
         },
     ];
     const fetchAPI = async () => {
-        const Respond = await GetAllAnswers({ key: id }, token)
+        const Respond = await GetAllAnswers(id)
         if(Respond.status === true && Respond.data.length > 0){
             const Newdata = Respond.data.map((item,index) => {
                 const date = new Date(parseInt(item.date));

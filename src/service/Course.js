@@ -1,20 +1,33 @@
 import { GetData , PostData , PatchData} from "../Utils/request";
-
-export const GetAllCourse = async (path,option = {key : ''},token = null) => {
-  const data = await GetData(`Course/${path}?key=${option.key}&&page=${option.page}&&limit=${option.limit}&&status=${option.status}`,token)
+export const GetAllCourse = async () => {
+  const data = await GetData(`Course/GetAll`)
   return data
 }
 
-export const PostCourse = async(option,token) => {
-  const Request = await PostData(`Course/post`,option,token)
+export const GetCourseTea = async () => {
+  const data = await GetData(`Course/GetCourseTea`)
+  return data
+}
+
+export const Getdetailcourse = async (key) => {
+  const data = await GetData(`Course/Getdetailcourse/${key}`)
+  return data
+}
+
+export const GetSchedule = async () => {
+  const data = await GetData(`Course/GetSchedule/`)
+  return data
+}
+
+
+export const PostCourse = async(option) => {
+  const Request = await PostData(`Course/post`,option)
   return Request
 }
 
 
-
-export const EditCourse = async(option,token) => {
-  console.log(option)
-  const Request = await PatchData(`Course/edit`,option,token)
+export const EditCourse = async(option) => {
+  const Request = await PatchData(`Course/edit`,option)
   return Request
 }
 

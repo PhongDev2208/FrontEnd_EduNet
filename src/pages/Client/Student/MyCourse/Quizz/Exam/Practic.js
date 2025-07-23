@@ -5,17 +5,17 @@ import { PostAnswers } from '../../../../../../service/Answer';
 import { selectUser } from '../../../../../../Redux/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
+import { AlertSuccess } from '../../../../../../Components/Components/Alert';
+import handle_error from '../../../../../../Components/helper/handle_error';
 
 
 function Practics() {
     const [DataQuestion, SetDataQuestion] = useState([])
     const { id } = useParams();
-    const token = useSelector(selectUser)
     const navigate = useNavigate()
 
     const fetchAPI = async () => {
-        const Respond = await GetAllQuestion({ key: id }, token)
+        const Respond = await GetAllQuestion(id)
         if (Respond.status === true) {
             SetDataQuestion(Respond.data)
         }
@@ -24,7 +24,6 @@ function Practics() {
     const handle_Mycourse_submit_quizz = async (e) => {
         const DataAnswers = {}
         const answers = Object.entries(e).map((item) => {
-            console.log(item)
             const newobject = {
                 Question_id: item[0],
                 results: []
@@ -40,16 +39,12 @@ function Practics() {
         })
         DataAnswers.answers = answers
         DataAnswers.topic_id = id
-        const Respond = await PostAnswers(DataAnswers, token)
+        const Respond = await PostAnswers(DataAnswers)
         if(Respond.status == true){
-            Swal.fire({
-                icon: "success",
-                title: "submitsuccess",
-                showConfirmButton: false,
-                timer: 1000
-              });
+              AlertSuccess("Add successed")
               navigate(`/Mycourse/quizz/Answer/detail/${Respond.data}`)
         }
+        handle_error(Respond,navigate)
     }
 
     useEffect(() => {

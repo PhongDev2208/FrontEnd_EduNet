@@ -1,6 +1,6 @@
 import Layout from "../Components/Layout/index"
 import Home from "../pages/Client/Home/index"
-import Course from "../pages/Client/Course/index"
+import Course from "../pages/Client/Course/List_course"
 import Profile from "../pages/Client/Profile/index"
 import Login from "../pages/Client/Auth/Login"
 import Chat from "../pages/Client/Chat/index"
@@ -38,7 +38,7 @@ export const routers = [
             {
                 index : true,
                 element : <Home/>
-            },
+            },          
             {
                 path : "/Course",
                 children : [

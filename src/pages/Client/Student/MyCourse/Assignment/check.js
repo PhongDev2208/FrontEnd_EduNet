@@ -7,7 +7,6 @@ import{Link , useParams} from "react-router-dom"
 
 function CheckAssignment() {
     const { id,idchild } = useParams()
-    const token = useSelector(selectUser)
     const [newdata,setnewdata] = useState()
     const columns = [
         {
@@ -29,7 +28,7 @@ function CheckAssignment() {
         }
     ];
     const FetchAPI = async() => {
-          const respond = await GetAllSubmit(`getall/${idchild}`,{},token)
+          const respond = await GetAllSubmit(idchild)
           if(respond.status == true){
              const newdata = respond.data.map((item,index) => {
                  return(

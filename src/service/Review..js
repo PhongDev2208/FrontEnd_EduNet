@@ -1,15 +1,11 @@
 import { GetData,PostData } from "../Utils/request";
 
-export const GetAllReview = async (option = {key : ''},token) => {
-
-  if(option.key == null){
-    option.key = ''
-   }
-  const data = await GetData(`review/getall?key=${option.key}&&page=${option.page}&&limit=${option.limit}`)
+export const GetAllReview = async (id) => {
+  const data = await GetData(`review/GetAll/${id}`)
   return data
 }
 
-export const PostReview = async(option,token) => {
-   const Request = await PostData(`review/post`,option,token)
+export const PostReview = async(option) => {
+   const Request = await PostData(`review/Post`,option)
    return Request
 }

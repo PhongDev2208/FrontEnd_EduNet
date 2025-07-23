@@ -1,12 +1,18 @@
 import { GetData,PostData } from "../Utils/request";
 
-export const PostSubmit = async(path,option,token) => {
-    const Request = await PostData(`submit/${path}`,option,token)
+export const GetAllSubmit = async(id) => {
+    const Request = await GetData(`submit/getall/${id}`)
+    return Request
+ }
+ 
+export const GetdetailSubmit = async(id) => {
+    const Request = await GetData(`submit/getdetail/${id}`)
+    return Request
+}
+
+export const PostSubmit = async(option) => {
+    const Request = await PostData(`submit/Post`,option)
     return Request
  }
 
  
-export const GetAllSubmit = async(path,option,token) => {
-    const Request = await GetData(`submit/${path}`,token)
-    return Request
- }

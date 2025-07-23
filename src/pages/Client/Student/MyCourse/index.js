@@ -1,21 +1,20 @@
 import { Table, Card, Button, Flex, DatePicker, Input, Select } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons';
-import { getCookie } from "../../../../Components/helper/cookie"
+import {faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, Link } from "react-router-dom"
 import { GetMycourse_course } from '../../../../service/Stucourse';
-import { GetAllCourse } from "../../../../service/Course"
+import { GetAllCourse, GetCourseTea } from "../../../../service/Course"
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, selectRole } from '../../../../Redux/user';
 import { useEffect, useState } from 'react';
 import "../../../../Styles/home/css/styleprivate.css"
 import Seturl from '../../../../Components/helper/SetURL';
 import DeletedURL from '../../../../Components/helper/deleteURL';
+import handle_error from '../../../../Components/helper/handle_error';
 const { RangePicker } = DatePicker;
 const { Search } = Input;
 
 function MyCourse() {
-    const token = useSelector(selectUser)
     const role = useSelector(selectRole)
     const [DataStCr, setdatastCr] = useState([])
     const navigate = useNavigate()
@@ -49,24 +48,18 @@ function MyCourse() {
 
         },
     ];
-    const option = {
-        key: null,
-        status: null
-    }
 
     const FetchAPI = async (type = null) => {
         let respond = {}
-        const searchParams = new URLSearchParams(window.location.search);
-        option.key = searchParams.get('key');
-        option.status = searchParams.get('status');
         if (role == "tea") {
-            respond = await GetAllCourse("GetCourseTea", option, token)
+            respond = await GetCourseTea()
         }
         else {
-            respond = await GetMycourse_course("GetCourse", option, token)
+            respond = await GetMycourse_course()
         }
-        let newdata = []
-        if (respond.status == true && respond.data.length > 0) {
+        console.log(respond)
+        if (respond.status == true && Array.isArray(respond.data)) {
+            let newdata = []
             newdata = respond.data.map((item, index) => {
                 return (
                     {
@@ -87,9 +80,9 @@ function MyCourse() {
                                 style={{ width: '70%' }}
                                 onChange={handle_Status_Change}
                                 options={[
-                                    { value: 0, label: 'Will Learn' },
-                                    { value: 1, label: 'Current Learning' },
-                                    { value: 2, label: 'Have Learned' },
+                                    { value: 1, label: 'Will Learn' },
+                                    { value: 2, label: 'Current Learning' },
+                                    { value: 3, label: 'Have Learned' },
 
                                 ]}
                             />
@@ -116,18 +109,17 @@ function MyCourse() {
                     }
                 )
             })
-        }
-        setdatastCr(newdata)
+            setdatastCr(newdata)
 
+        }
+        handle_error(respond,navigate)
     }
     const handle_Status_Change = (e) => {
-        console.log(e)
     }
     const handle_lock_mycourse = (e) => {
-        console.log(e)
     }
     const handle_status_mycourse = (e) => {
-        if (e == 3) {
+        if (e == 4) {
             DeletedURL()
         }
         else {
@@ -144,10 +136,6 @@ function MyCourse() {
     }, [])
     return (
         <div>
-        
-            {/* Breadcrumb end */}
-            {/* Wishlist-area Start */}
-
             <div className="shopping-area pt-90 pb-60">
                 <div className="container text-center">
                     <Card style={{
@@ -158,10 +146,10 @@ function MyCourse() {
                         title="Search" >
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{width :"50%"}}>
-                            <Button onClick={() => handle_status_mycourse(3)}>GetAll</Button>
-                                <Button onClick={() => handle_status_mycourse(0)}>Will</Button>
-                                <Button onClick={() => handle_status_mycourse(1)}>Current</Button>
-                                <Button onClick={() => handle_status_mycourse(2)}>Already</Button>
+                            <Button onClick={() => handle_status_mycourse(4)}>GetAll</Button>
+                                <Button onClick={() => handle_status_mycourse(1)}>Will</Button>
+                                <Button onClick={() => handle_status_mycourse(2)}>Current</Button>
+                                <Button onClick={() => handle_status_mycourse(3)}>Already</Button>
 
                             </div>
                             <div style={{width : "80%", textAlign : "right"}}>
@@ -185,7 +173,7 @@ function MyCourse() {
                         </div>
 
                         {DataStCr.length > 0 ? (
-                            <Table columns={columns} dataSource={DataStCr} />
+                            <Table columns={columns} dataSource={DataStCr}   pagination={{ pageSize: 5 }}                             />
                         ) : (<div>Bạn chưa đăng ký bất kì khóa học nào </div>)}
                     </Card>
 

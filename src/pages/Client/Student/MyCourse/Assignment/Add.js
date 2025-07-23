@@ -1,23 +1,18 @@
 import { useParams } from "react-router-dom";
-import { Button, Select, Checkbox, Form, Input, Row, Col, Card, Upload, DatePicker, Space } from 'antd';
-import { useEffect, useState } from 'react';
-import { useNavigate, Link } from "react-router-dom"
-
+import { Button, Form, Input, Row, Col, Card, DatePicker } from 'antd';
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import { PostAssignment } from "../../../../../service/Assignment";
+import { AlertSuccess } from "../../../../../Components/Components/Alert";
 import MyEditor from "../../../../../Components/Components/tinymce"
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from "../../../../../Redux/user";
-import Swal from 'sweetalert2';
+import handle_error from "../../../../../Components/helper/handle_error";
 
 const { RangePicker } = DatePicker;
 
 function AddAssignmentMycourse() {
     const { id } = useParams()
-    const token = useSelector(selectUser)
     const navigate = useNavigate()
-
     const [content, setcontent] = useState("");
-
     const handle_Submit_form_create_course = async (values) => {
 
         const newcustom = values.start_time.map((item) => {
@@ -38,23 +33,12 @@ function AddAssignmentMycourse() {
         values.time = time
         values.description = content
         values.course_id = id
-        const respond = await PostAssignment(values, token)
+        const respond = await PostAssignment(values)
         if (respond.status == true) {
-            Swal.fire({
-                icon: "success",
-                title: "Add Success",
-                showConfirmButton: false,
-                timer: 1000
-            });
+            AlertSuccess("Add success")
             navigate(`/Mycourse/Assignment/index/${id}`)
-        } else {
-            Swal.fire({
-                icon: "error",
-                title: "There was an error",
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
+        } 
+        handle_error(respond,navigate)
     }
 
     return (

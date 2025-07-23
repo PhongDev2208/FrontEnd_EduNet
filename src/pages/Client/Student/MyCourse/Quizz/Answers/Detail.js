@@ -10,7 +10,7 @@ function DetailAnswer() {
     const { id } = useParams();
     const token = useSelector(selectUser)
     const fetchAPI = async () => {
-        const Respond = await GetDetailAnswer({ key: id }, token)
+        const Respond = await GetDetailAnswer(id)
         console.log(Respond)
         if(Respond.status === true){
             SetDataAnswers(Respond.data)

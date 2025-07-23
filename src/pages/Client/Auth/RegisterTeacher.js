@@ -2,21 +2,18 @@ import { Link, useNavigate } from "react-router-dom"
 import { Steps, Tabs } from 'antd';
 import { useRef , useState } from "react";
 import { Flex, Input, Typography, Select, Upload, Form } from 'antd';
-import { GetAllUser, PostUser } from "../../../service/User";
+import { PostTeacher } from "../../../service/User";
 import { setCookie, getCookie } from "../../../Components/helper/cookie";
 import { Uploadlist } from "../../../Components/helper/UploadImg";
 import Swal from 'sweetalert2';
 // or via CommonJS
 function RegisterStudent() {
     const navigate = useNavigate()
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [fileList, setFileList] = useState([]);
     const [active, setactive] = useState(parseInt(1))
     const [degree, setdegree] = useState("Primary School")
     const handle_Submit_form_login = async (e) => {
         e.preventDefault();
-        if (isSubmitting == true) return;
-        setIsSubmitting(true);
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         const hasemtry = Object.values(data).some(value => value === null || value == "" || value == undefined)
@@ -39,13 +36,12 @@ function RegisterStudent() {
                 showConfirmButton: false,
                 timer: 1500
             });
-            console.log("đã chay vao day")
             return;
         }
-        const Respond = await PostUser("Post/teacher", data, null)
+        const Respond = await PostTeacher(data)
+        
         if (Respond.status == true) {
             setactive(active + 1)
-
             Swal.fire({
                 icon: "success",
                 title: "Register Success",
@@ -61,11 +57,7 @@ function RegisterStudent() {
             });
             return;
         }
-        setTimeout(() => {
-            setIsSubmitting(false);
-
-        }, 2000);
-
+       
     }
    
 
