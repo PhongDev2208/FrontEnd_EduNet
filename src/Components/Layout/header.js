@@ -43,7 +43,7 @@ function Header() {
                 <div className="d-flex flex-wrap justify-content-between gap-15 align-items-center">
                   <div className="phicssheader d-flex flex-wrap justify-content-between gap-15 align-items-center">
                     <FontAwesomeIcon style={{color : "#30C2EC", marginTop : "3px"}} icon={faEnvelope} />
-                    <span style={{color : "#687687"}}>nhutphigenz@email.com</span>
+                    <span style={{color : "#687687"}}>luongphong22082003@email.com</span>
                   </div>
                   <div  className="phissheaderright social-link social-link_gradient style-2 size-md">
                     <a className="rounded-pill" href="https://www.instagram.com/" target="_blank" title="instagram"><FontAwesomeIcon style={{fontSize : "14px"}} className="icon" icon={faFacebookF} /></a>
@@ -67,7 +67,7 @@ function Header() {
                         <a href="/" style={{color : "#30C2EC"}} className="nav-link toggle">Home <i className="fal fa-plus" /></a>
                       </li>
                       <li className="nav-item">
-                        <a href="/course" style={{color : "#30C2EC"}} className="nav-link toggle">Courses <i className="fal fa-plus" /></a>
+                        <a href="/courses" style={{color : "#30C2EC"}} className="nav-link toggle">Courses <i className="fal fa-plus" /></a>
  
                       </li>
                       <li className="nav-item">

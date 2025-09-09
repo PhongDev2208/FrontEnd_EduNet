@@ -19,7 +19,8 @@ function RegisterStudent() {
         const hasemtry = Object.values(data).some(value => value === null || value == "" || value == undefined)
         data.degree = degree
         data.cv = await Uploadlist(fileList)
-
+        console.log(data)
+        
         if (data.password != data.confirmPassword) {
             Swal.fire({
                 icon: "error",
@@ -243,7 +244,6 @@ function RegisterStudent() {
                                                                     listType="picture-card"
                                                                     fileList={fileList}
                                                                     onChange={onChangeImg}
-
 
                                                                 >
                                                                     {fileList.length < 1 && '+ Upload'}

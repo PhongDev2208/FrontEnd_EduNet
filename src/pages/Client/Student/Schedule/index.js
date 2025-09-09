@@ -1,107 +1,109 @@
-import { Badge, Modal,Calendar ,Button } from 'antd';
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import { GetAllCourse, GetSchedule } from '../../../../service/Course';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser,selectRole } from "../../../../Redux/user";
-import { GetScheduleStudent } from '../../../../service/Stucourse';
+import { Badge, Modal, Calendar, Button } from "antd";
+import React, { useEffect, useState } from "react";
+import moment from "moment";
+import { GetAllCourse, GetSchedule } from "../../../../service/Course";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser, selectRole } from "../../../../Redux/user";
+import { GetScheduleStudent } from "../../../../service/Stucourse";
 const generateSchedule = (scheduleData) => {
-    let schedule = {};
+  let schedule = {};
 
-    scheduleData.forEach(course => {
-        const startDate = moment(course.start_time);
-        const endDate = moment(course.end_time);
+  scheduleData.forEach((course) => {
+    const startDate = moment(course.start_time);
+    const endDate = moment(course.end_time);
 
-        let currentDate = startDate.clone();
+    let currentDate = startDate.clone();
 
-        while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
-            course.daysOfWeek.forEach(dayObj => {
-                if (currentDate.day() === dayObj.Day) {
-                    const dateKey = currentDate.format('D-MM-YYYY');
-                    const startHour = dayObj.hourstart;
-                    const endHour = dayObj.hourend;
+    while (
+      currentDate.isBefore(endDate) ||
+      currentDate.isSame(endDate, "day")
+    ) {
+      course.days_of_week.forEach((dayObj) => {
+        if (currentDate.day() === dayObj.day) {
+          const dateKey = currentDate.format("D-MM-YYYY");
+          const startHour = dayObj.hour_start;
+          const endHour = dayObj.hour_end;
 
-                    const startTime = currentDate.clone().hour(startHour).minute(0);
-                    const endTime = currentDate.clone().hour(endHour).minute(0); 
+          const startTime = currentDate.clone().hour(startHour).minute(0);
+          const endTime = currentDate.clone().hour(endHour).minute(0);
 
-                    if (!schedule[dateKey]) {
-                        schedule[dateKey] = [];
-                    }
+          if (!schedule[dateKey]) {
+            schedule[dateKey] = [];
+          }
 
-                    schedule[dateKey].push({
-                        display: course.display,
-                        startTime: startTime.format('HH:mm'), 
-                        endTime: endTime.format('HH:mm')     
-                    });
-                }
-            });
-
-            currentDate.add(1, 'day');
+          schedule[dateKey].push({
+            display: course.display,
+            startTime: startTime.format("HH:mm"),
+            endTime: endTime.format("HH:mm"),
+          });
         }
-    });
+      });
 
-    return schedule;
+      currentDate.add(1, "day");
+    }
+  });
+
+  return schedule;
 };
 function Schedule() {
-    const role = useSelector(selectRole)
+  const role = useSelector(selectRole);
 
-    const [DataSchedule,setDataSchedule] = useState([])
-    const FetchAPI = async() => {
-        let respond = null
-        if(role == "tea") {
-            respond = await GetSchedule()
-        }
-        else{
-            respond = await GetScheduleStudent();
-
-        }
-        const finalSchedule = generateSchedule(respond.data);
-        setDataSchedule(finalSchedule);
-
-
+  const [DataSchedule, setDataSchedule] = useState([]);
+  const FetchAPI = async () => {
+    let respond = null;
+    if (role == "tea") {
+      respond = await GetSchedule();
+    } else {
+      respond = await GetScheduleStudent();
     }
-    const getListData = (value) => {
+    const finalSchedule = generateSchedule(respond.data);
+    setDataSchedule(finalSchedule);
+  };
+  const getListData = (value) => {
     let listData = [];
     const day = value.date();
     const month = value.month() + 1;
-    const year = value.year();  
+    const year = value.year();
 
-    const key = `${day}-${month < 10 ? '0' + month : month}-${year}`;
+    const key = `${day}-${month < 10 ? "0" + month : month}-${year}`;
 
     if (DataSchedule[key]) {
-        listData = DataSchedule[key];
+      listData = DataSchedule[key];
     }
 
     return listData || [];
-};
+  };
 
-const dateCellRender = (value) => {
+  const dateCellRender = (value) => {
     const listData = getListData(value);
     return (
-        <ul className="events">
-            {listData.map((item, index) => (
-                <li key={index}>
-                    <Badge status="success" text={`${item.display.title} từ ${item.startTime} đến ${item.endTime}`} />
-                </li>
-            ))}
-        </ul>
+      <ul className="events">
+        {listData.map((item, index) => (
+          <li key={index}>
+            <Badge
+              status="success"
+              text={`${item.display.title} từ ${item.startTime} đến ${item.endTime}`}
+            />
+          </li>
+        ))}
+      </ul>
     );
-};
+  };
 
-const cellRender = (current, info) => {
-    if (info.type === 'date') return dateCellRender(current);
+  const cellRender = (current, info) => {
+    if (info.type === "date") return dateCellRender(current);
     return info.originNode;
-};
-    useEffect(() => {
-        FetchAPI()
-    },[])
-    return (
-        <div className="shopping-area pt-100 pb-60">
-            <div className="container">
-                <Calendar cellRender={cellRender} />
-            </div>
-        </div>
-    );
+  };
+  useEffect(() => {
+    FetchAPI();
+  }, []);
+  return (
+    <div className="shopping-area pt-100 pb-60">
+      <div className="container">
+        <Calendar cellRender={cellRender} />
+      </div>
+    </div>
+  );
 }
 
 export default Schedule;

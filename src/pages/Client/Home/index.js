@@ -175,10 +175,10 @@ function Home() {
                                 <div className="">
                                   <FontAwesomeIcon className="color-all" icon={faBookOpen} />
                                   <span className="font-sm color-gray" style={{ marginLeft: "5px" }}>
-                                    Le Bao Hong Duc
+                                    Lường Thanh Phong
                                   </span>
                                 </div>
-                                <span className=" font-sm icon-start"><FontAwesomeIcon className="color-all" icon={faClock} /> <span className="color-gray" style={{ display: "inline-block", marginLeft: "1px" }}>{item.time.startDisplay}</span></span>
+                                <span className=" font-sm icon-start"><FontAwesomeIcon className="color-all" icon={faClock} /> <span className="color-gray" style={{ display: "inline-block", marginLeft: "1px" }}>{item.time.start_display}</span></span>
                               </div>
                             </div>
                             <div className="px-xl-3 mb-1">

@@ -1,18 +1,16 @@
-import { GetData,PostData } from "../Utils/request";
+import { GetData, PostData } from "../Utils/request";
 
-export const GetAllSubmit = async(id) => {
-    const Request = await GetData(`submit/getall/${id}`)
-    return Request
- }
- 
-export const GetdetailSubmit = async(id) => {
-    const Request = await GetData(`submit/getdetail/${id}`)
-    return Request
-}
+export const GetAllSubmit = async (id) => {
+  const Request = await GetData(`submits/get-all/${id}`);
+  return Request;
+};
 
-export const PostSubmit = async(option) => {
-    const Request = await PostData(`submit/Post`,option)
-    return Request
- }
+export const GetdetailSubmit = async (id) => {
+  const Request = await GetData(`submits/get-detail/${id}`);
+  return Request;
+};
 
- 
+export const PostSubmit = async (option) => {
+  const Request = await PostData(`submits/post`, option);
+  return Request;
+};

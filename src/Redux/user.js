@@ -24,6 +24,6 @@ export const { login, logout } = userSlice.actions;
 
 // Selector để lấy dữ liệu từ state
 export const selectUser = (state) => state.user.user;
-export const selectRole = (state) => state.user.role
+export const selectRole = (state) => state.user.role;
 // Export reducer
 export default userSlice.reducer;
