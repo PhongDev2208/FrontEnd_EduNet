@@ -1,6 +1,6 @@
-import { Uploadlist } from "../../../../Components/helper/UploadImg";
+import { Uploadlist } from "../../../../components/helper/UploadImg";
 import { EditCourse, Getdetailcourse } from "../../../../service/Course";
-import { selectUser } from "../../../../Redux/user";
+import { selectUser } from "../../../../redux/user";
 import {
   Button,
   Form,
@@ -16,9 +16,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GetAllCategories } from "../../../../service/Categories";
-import MyEditor from "../../../../Components/Components/tinymce";
-import { AlertSuccess } from "../../../../Components/Components/Alert";
-import handle_error from "../../../../Components/helper/handle_error";
+import MyEditor from "../../../../components/components/tinymce";
+import { AlertSuccess } from "../../../../components/components/Alert";
+import handle_error from "../../../../components/helper/handle_error";
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 function EditMycourse() {

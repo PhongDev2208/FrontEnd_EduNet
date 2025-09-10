@@ -12,11 +12,11 @@ import {
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { GetAllQuestion } from "../../../../../../service/Question";
 import { PostAnswers } from "../../../../../../service/Answer";
-import { selectUser } from "../../../../../../Redux/user";
+import { selectUser } from "../../../../../../redux/user";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { AlertSuccess } from "../../../../../../Components/Components/Alert";
-import handle_error from "../../../../../../Components/helper/handle_error";
+import { AlertSuccess } from "../../../../../../components/components/Alert";
+import handle_error from "../../../../../../components/helper/handle_error";
 
 function Practics() {
   const [DataQuestion, SetDataQuestion] = useState([]);

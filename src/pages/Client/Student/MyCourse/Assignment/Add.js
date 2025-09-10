@@ -3,9 +3,9 @@ import { Button, Form, Input, Row, Col, Card, DatePicker } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostAssignment } from "../../../../../service/Assignment";
-import { AlertSuccess } from "../../../../../Components/Components/Alert";
-import MyEditor from "../../../../../Components/Components/tinymce";
-import handle_error from "../../../../../Components/helper/handle_error";
+import { AlertSuccess } from "../../../../../components/components/Alert";
+import MyEditor from "../../../../../components/components/tinymce";
+import handle_error from "../../../../../components/helper/handle_error";
 
 const { RangePicker } = DatePicker;
 

@@ -1,4 +1,4 @@
-import { GetData, PostData, PatchData } from "../Utils/request";
+import { GetData, PostData, PatchData } from "../utils/request";
 
 export const GetMycourse_course = async () => {
   const data = await GetData(`studentcourses/get-student-course`);

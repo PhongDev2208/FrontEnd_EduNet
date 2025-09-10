@@ -1,4 +1,4 @@
-import { GetData, PostData } from "../Utils/request";
+import { GetData, PostData } from "../utils/request";
 
 export const GetAllAssignment = async (id) => {
   const data = await GetData(`assignments/get-all/${id}`);

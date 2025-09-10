@@ -1,4 +1,4 @@
-import { GetData, PostData } from "../Utils/request";
+import { GetData, PostData } from "../utils/request";
 
 export const GetAllAnswers = async (id) => {
   const data = await GetData(`answers/get-all/${id}`);

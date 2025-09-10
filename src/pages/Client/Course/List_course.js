@@ -1,7 +1,7 @@
-import "../../../Styles/home/css/styleprivate.css";
-import Seturl from "../../../Components/helper/SetURL";
-import PaginationCustom from "../../../Components/Components/panigation";
-import Handleerror from "../../../Components/helper/handle_error";
+import "../../../styles/home/css/styleprivate.css";
+import Seturl from "../../../components/helper/SetURL";
+import PaginationCustom from "../../../components/components/panigation";
+import Handleerror from "../../../components/helper/handle_error";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

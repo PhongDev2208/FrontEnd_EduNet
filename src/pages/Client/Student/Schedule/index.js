@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { GetAllCourse, GetSchedule } from "../../../../service/Course";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectRole } from "../../../../Redux/user";
+import { selectUser, selectRole } from "../../../../redux/user";
 import { GetScheduleStudent } from "../../../../service/Stucourse";
 const generateSchedule = (scheduleData) => {
   let schedule = {};

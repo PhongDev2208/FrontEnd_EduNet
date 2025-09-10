@@ -1,4 +1,4 @@
-import { GetData, PostData } from "../Utils/request";
+import { GetData, PostData } from "../utils/request";
 
 export const GetAllMaterial = async (id) => {
   const data = await GetData(`materials/get-all/${id}`);

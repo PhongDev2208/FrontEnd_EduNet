@@ -11,14 +11,14 @@ import {
   message,
 } from "antd";
 import { useEffect, useState } from "react";
-import { Uploadlist } from "../../../../../Components/helper/UploadImg";
+import { Uploadlist } from "../../../../../components/helper/UploadImg";
 import {
   PostMaterial,
   GetAllMaterial,
   Postchild,
 } from "../../../../../service/Material";
-import { AlertSuccess } from "../../../../../Components/Components/Alert";
-import handle_error from "../../../../../Components/helper/handle_error";
+import { AlertSuccess } from "../../../../../components/components/Alert";
+import handle_error from "../../../../../components/helper/handle_error";
 
 function AddchildMaterial() {
   const { id } = useParams();

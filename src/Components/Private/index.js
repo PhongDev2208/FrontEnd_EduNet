@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../Redux/user";
+import { login } from "../../redux/user";
 import { Getdetail } from "../../service/User";
 import { useEffect, useState } from "react";
 import { Spin } from "antd";

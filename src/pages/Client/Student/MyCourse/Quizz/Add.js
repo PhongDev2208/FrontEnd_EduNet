@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectRole } from "../../../../../Redux/user";
+import { selectUser, selectRole } from "../../../../../redux/user";
 import { PostQuestion } from "../../../../../service/Question";
 import {
   Button,
@@ -17,8 +17,8 @@ import {
   Space,
 } from "antd";
 import Swal from "sweetalert2";
-import handle_error from "../../../../../Components/helper/handle_error";
-import { AlertSuccess } from "../../../../../Components/Components/Alert";
+import handle_error from "../../../../../components/helper/handle_error";
+import { AlertSuccess } from "../../../../../components/components/Alert";
 
 const { TextArea } = Input;
 

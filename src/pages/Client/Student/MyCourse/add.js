@@ -1,4 +1,4 @@
-import { Uploadlist } from "../../../../Components/helper/UploadImg";
+import { Uploadlist } from "../../../../components/helper/UploadImg";
 import { PostCourse } from "../../../../service/Course";
 import { GetAllCategories } from "../../../../service/Categories";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +15,9 @@ import {
   Space,
 } from "antd";
 import { useEffect, useState } from "react";
-import MyEditor from "../../../../Components/Components/tinymce";
-import { AlertSuccess } from "../../../../Components/Components/Alert";
-import handle_error from "../../../../Components/helper/handle_error";
+import MyEditor from "../../../../components/components/tinymce";
+import { AlertSuccess } from "../../../../components/components/Alert";
+import handle_error from "../../../../components/helper/handle_error";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 

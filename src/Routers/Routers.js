@@ -1,4 +1,4 @@
-import Layout from "../Components/Layout/index";
+import Layout from "../components/layout/index";
 import Home from "../pages/Client/Home/index";
 import Course from "../pages/Client/Course/List_course";
 import Profile from "../pages/Client/Profile/index";
@@ -7,7 +7,7 @@ import Chat from "../pages/Client/Chat/index";
 import MyCourse from "../pages/Client/Student/MyCourse/index";
 import Schedule from "../pages/Client/Student/Schedule/index";
 import Detail from "../pages/Client/Course/detail";
-import Private from "../Components/Private";
+import Private from "../components/private";
 import DetailMyCourse from "../pages/Client/Student/MyCourse/detail";
 import Quizz from "../pages/Client/Student/MyCourse/Quizz/index";
 import Practics from "../pages/Client/Student/MyCourse/Quizz/Exam/Practic";

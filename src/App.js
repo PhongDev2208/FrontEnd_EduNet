@@ -1,4 +1,4 @@
-import Allrouter from "./Routers/Routers";
+import Allrouter from "./routers/Routers";
 function App() {
   return (
     <Allrouter/>

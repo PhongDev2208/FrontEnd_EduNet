@@ -1,15 +1,20 @@
-import homepass1 from "../../../Styles/home/images/hero-banner-2.png"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faBookOpen, faMoneyBillWave, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import homepass1 from "../../../styles/home/images/hero-banner-2.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClock,
+  faBookOpen,
+  faMoneyBillWave,
+  faCalendar,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { GetAllCategories } from "../../../service/Categories";
-import { GetAllCourse } from "../../../service/Course"
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import { GetAllCourse } from "../../../service/Course";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 function Home() {
   const [data, setdata] = useState([]);
   const [Datacourse, setDatacourse] = useState([]);
@@ -17,11 +22,11 @@ function Home() {
     const newdata = await GetAllCategories();
     const newdatacourse = await GetAllCourse();
     setdata(newdata.data);
-    setDatacourse(newdatacourse.data)
-  }
+    setDatacourse(newdatacourse.data);
+  };
   useEffect(() => {
     fetchAPI();
-  }, [])
+  }, []);
   return (
     <>
       <section className="hero-banner hero-banner_v3 header-next pb-60">
@@ -29,29 +34,48 @@ function Home() {
           <div className="row align-items-center gx-xl-5">
             <div className="col-lg-6">
               <div className="banner-content mb-40">
-                <h1 className="title mb-30" data-aos="fade-up" data-aos-delay={100}>
+                <h1
+                  className="title mb-30"
+                  data-aos="fade-up"
+                  data-aos-delay={100}
+                >
                   Better Learning For Better Skills
                 </h1>
                 <p className="text" data-aos="fade-up" data-aos-delay={100}>
                   Welcome to EduNet, your online destination for high-quality
                   education and professional development.
                 </p>
-                <div className="banner-filter-form mt-40" data-aos="fade-up" data-aos-delay={150}>
+                <div
+                  className="banner-filter-form mt-40"
+                  data-aos="fade-up"
+                  data-aos-delay={150}
+                >
                   <div className="form-wrapper border rounded-pill">
                     <form>
                       <div className="row align-items-center">
                         <div className="col-xl-4 col-lg-5 col-md-4 col-sm-6">
                           <div className="input-group">
-                            <label htmlFor="search"><i className="fas fa-search" /></label>
-                            <input type="text" id="search" className="form-control" placeholder="Search course" />
+                            <label htmlFor="search">
+                              <i className="fas fa-search" />
+                            </label>
+                            <input
+                              type="text"
+                              id="search"
+                              className="form-control"
+                              placeholder="Search course"
+                            />
                             <div className="vr" />
                           </div>
                         </div>
                         <div className="col-xl-4 col-lg-5 col-md-4 col-sm-6">
                           <div className="input-group">
-                            <label htmlFor="search"><i className="fas fa-th-large" /></label>
+                            <label htmlFor="search">
+                              <i className="fas fa-th-large" />
+                            </label>
                             <select name="test" className="form-control">
-                              <option data-display="Select Category">Select Category...</option>
+                              <option data-display="Select Category">
+                                Select Category...
+                              </option>
                               <option value="1">Design</option>
                               <option value="2">UI Design</option>
                               <option value="3">UX Design</option>
@@ -59,7 +83,11 @@ function Home() {
                           </div>
                         </div>
                         <div className="col-xl-4 col-lg-2 col-md-4 col-sm-6">
-                          <button className="btn btn-lg btn-primary btn-gradient rounded-pill w-100" type="button" aria-label="Find Course">
+                          <button
+                            className="btn btn-lg btn-primary btn-gradient rounded-pill w-100"
+                            type="button"
+                            aria-label="Find Course"
+                          >
                             <span>Find Course</span>
                             <i className="fal fa-search" />
                           </button>
@@ -72,7 +100,12 @@ function Home() {
             </div>
             <div className="col-lg-6" data-aos="fade-up">
               <div className="banner-image mb-40">
-                <img className="" style={{ zIndex: 1000 }} src={homepass1} alt="Banner Image" />
+                <img
+                  className=""
+                  style={{ zIndex: 1000 }}
+                  src={homepass1}
+                  alt="Banner Image"
+                />
               </div>
             </div>
           </div>
@@ -89,10 +122,20 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <div className="section-title title-inline mb-50" data-aos="fade-up">
+                <div
+                  className="section-title title-inline mb-50"
+                  data-aos="fade-up"
+                >
                   <h2 className="title">Top Trending Categories</h2>
                   <div className="cta-btn">
-                    <a href="courses.html" className="btn btn-lg btn-primary btn-gradient rounded-pill" title="View All" target="_self">View All</a>
+                    <a
+                      href="courses.html"
+                      className="btn btn-lg btn-primary btn-gradient rounded-pill"
+                      title="View All"
+                      target="_self"
+                    >
+                      View All
+                    </a>
                   </div>
                 </div>
               </div>
@@ -105,29 +148,37 @@ function Home() {
                   slidesPerView={4}
                   pagination={{ clickable: true }}
                 >
-                  {
-                    data.length > 0 && (
-                      data.map((item, index) => {
-                        return (
-                          <SwiperSlide key={index}> <div className="card p-25 border radius-md" >
+                  {data.length > 0 &&
+                    data.map((item, index) => {
+                      return (
+                        <SwiperSlide key={index}>
+                          {" "}
+                          <div className="card p-25 border radius-md">
                             <div className="card-img mb-20">
-                              <img className="lazyload" src={item.image[0]} data-src="assets/images/category/cat-7.png" alt="Category" />
+                              <img
+                                className="lazyload"
+                                src={item.image[0]}
+                                data-src="assets/images/category/cat-7.png"
+                                alt="Category"
+                              />
                             </div>
-                            <h5 className="card-title lc-1 mb-1" style={{ color: "#30C2EC" }}>
+                            <h5
+                              className="card-title lc-1 mb-1"
+                              style={{ color: "#30C2EC" }}
+                            >
                               {item.name}
                             </h5>
-                            <p className="card-text" style={{ color: "#687687" }}>
+                            <p
+                              className="card-text"
+                              style={{ color: "#687687" }}
+                            >
                               {item.description}
                             </p>
-                          </div></SwiperSlide>
-                        )
-                      })
-
-                    )
-                  }
-
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
                 </Swiper>
-
               </div>
             </div>
           </div>
@@ -136,14 +187,23 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <div className="section-title title-inline mb-50" data-aos="fade-up">
+                <div
+                  className="section-title title-inline mb-50"
+                  data-aos="fade-up"
+                >
                   <h2 className="title">Most Recent Courses</h2>
                   <div className="cta-btn">
-                    <a href="courses.html" className="btn btn-lg btn-primary btn-gradient rounded-pill" title="See All Course" target="_self">See All Course</a>
+                    <a
+                      href="courses.html"
+                      className="btn btn-lg btn-primary btn-gradient rounded-pill"
+                      title="See All Course"
+                      target="_self"
+                    >
+                      See All Course
+                    </a>
                   </div>
                 </div>
               </div>
-
 
               <div className="col-12">
                 <Swiper
@@ -153,47 +213,122 @@ function Home() {
                   slidesPerView={2}
                   pagination={{ clickable: true }}
                 >
-                  {
-                    Datacourse.map((item) => {
-                      return (
-                        <SwiperSlide>  <div className="row g-0 course-default course-column border radius-md mb-25 align-items-center">
+                  {Datacourse.map((item) => {
+                    return (
+                      <SwiperSlide>
+                        {" "}
+                        <div className="row g-0 course-default course-column border radius-md mb-25 align-items-center">
                           <figure className="course-img col-sm-12 col-xl-5">
-                            <a href="courses.html" title="Image" target="_self" className="lazy-container radius-md ratio ratio-5-4">
-                              <img className="lazyload" src={item.img[0]} data-src="assets/images/course/pro-25.jpg" alt="course" />
+                            <a
+                              href="courses.html"
+                              title="Image"
+                              target="_self"
+                              className="lazy-container radius-md ratio ratio-5-4"
+                            >
+                              <img
+                                className="lazyload"
+                                src={item.img[0]}
+                                data-src="assets/images/course/pro-25.jpg"
+                                alt="course"
+                              />
                             </a>
                             <div className="hover-show radius-md">
-                              <a href="courses.html" className="btn btn-md btn-primary btn-gradient rounded-pill" title="Enroll Now" target="_self">Enroll Now</a>
+                              <a
+                                href="courses.html"
+                                className="btn btn-md btn-primary btn-gradient rounded-pill"
+                                title="Enroll Now"
+                                target="_self"
+                              >
+                                Enroll Now
+                              </a>
                             </div>
                           </figure>
                           <div className="course-details col-sm-12 col-xl-7 ps-xl-2">
                             <div className="p-3">
-                              <p  style={{ color: "#30C2EC" , marginBottom : "10px"}}>{item.title}</p>
-                              <h6 className="course-title lc-2 " style={{marginBottom : "5px !important"}} >
-                              Explore the details to help you gain a deeper understanding.
+                              <p
+                                style={{
+                                  color: "#30C2EC",
+                                  marginBottom: "10px",
+                                }}
+                              >
+                                {item.title}
+                              </p>
+                              <h6
+                                className="course-title lc-2 "
+                                style={{ marginBottom: "5px !important" }}
+                              >
+                                Explore the details to help you gain a deeper
+                                understanding.
                               </h6>
                               <div className="authors mt-15">
                                 <div className="">
-                                  <FontAwesomeIcon className="color-all" icon={faBookOpen} />
-                                  <span className="font-sm color-gray" style={{ marginLeft: "5px" }}>
+                                  <FontAwesomeIcon
+                                    className="color-all"
+                                    icon={faBookOpen}
+                                  />
+                                  <span
+                                    className="font-sm color-gray"
+                                    style={{ marginLeft: "5px" }}
+                                  >
                                     Lường Thanh Phong
                                   </span>
                                 </div>
-                                <span className=" font-sm icon-start"><FontAwesomeIcon className="color-all" icon={faClock} /> <span className="color-gray" style={{ display: "inline-block", marginLeft: "1px" }}>{item.time.start_display}</span></span>
+                                <span className=" font-sm icon-start">
+                                  <FontAwesomeIcon
+                                    className="color-all"
+                                    icon={faClock}
+                                  />{" "}
+                                  <span
+                                    className="color-gray"
+                                    style={{
+                                      display: "inline-block",
+                                      marginLeft: "1px",
+                                    }}
+                                  >
+                                    {item.time.start_display}
+                                  </span>
+                                </span>
                               </div>
                             </div>
                             <div className="px-xl-3 mb-1">
                               <div className="course-bottom-info py-2 px-3 px-xl-0">
-                                <span className=" font-sm icon-start"><FontAwesomeIcon className="color-all" icon={faMoneyBillWave} /> <span className="color-gray" style={{ display: "inline-block", marginLeft: "1px" }}>{item.price} $</span></span>
-                                <span className=" font-sm icon-start"><FontAwesomeIcon className="color-all" icon={faCalendar} /> <span className="color-gray" style={{ display: "inline-block", marginLeft: "1px" }}>{item.numberlesson} leasson</span></span>
+                                <span className=" font-sm icon-start">
+                                  <FontAwesomeIcon
+                                    className="color-all"
+                                    icon={faMoneyBillWave}
+                                  />{" "}
+                                  <span
+                                    className="color-gray"
+                                    style={{
+                                      display: "inline-block",
+                                      marginLeft: "1px",
+                                    }}
+                                  >
+                                    {item.price} $
+                                  </span>
+                                </span>
+                                <span className=" font-sm icon-start">
+                                  <FontAwesomeIcon
+                                    className="color-all"
+                                    icon={faCalendar}
+                                  />{" "}
+                                  <span
+                                    className="color-gray"
+                                    style={{
+                                      display: "inline-block",
+                                      marginLeft: "1px",
+                                    }}
+                                  >
+                                    {item.numberlesson} leasson
+                                  </span>
+                                </span>
                               </div>
                             </div>
                           </div>
-                        </div></SwiperSlide>
-                      )
-                    })
-                  }
-
-
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
               </div>
             </div>
@@ -834,11 +969,8 @@ function Home() {
             </div>
           </div>
         </div> */}
-
-
-
       </div>
     </>
-  )
+  );
 }
-export default Home
+export default Home;

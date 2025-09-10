@@ -2,7 +2,7 @@ import { Card, Col, Row, Table, Button } from "antd";
 import { useEffect, useState } from "react";
 import { GetAllAssignment } from "../../../../../service/Assignment";
 import { useSelector } from "react-redux";
-import { selectRole } from "../../../../../Redux/user";
+import { selectRole } from "../../../../../redux/user";
 import { Link, useParams } from "react-router-dom";
 
 function Assignment() {

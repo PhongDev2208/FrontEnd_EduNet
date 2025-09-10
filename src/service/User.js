@@ -1,4 +1,4 @@
-import { GetData, PostData } from "../Utils/request";
+import { GetData, PostData } from "../utils/request";
 
 export const Getdetail = async () => {
   const data = await GetData(`users/get-detail`);

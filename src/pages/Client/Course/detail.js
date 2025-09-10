@@ -1,4 +1,4 @@
-import "../../../Styles/home/css/styleprivate.css";
+import "../../../styles/home/css/styleprivate.css";
 import { useParams } from "react-router-dom";
 import { PostStucourse } from "../../../service/Stucourse";
 import { Getdetailcourse } from "../../../service/Course";
@@ -16,8 +16,8 @@ import {
 import { useEffect, useState } from "react";
 import { PostReview, GetAllReview } from "../../../service/Review.";
 import { useNavigate } from "react-router-dom";
-import { getCookie } from "../../../Components/helper/cookie";
-import { Uploadlist } from "../../../Components/helper/UploadImg";
+import { getCookie } from "../../../components/helper/cookie";
+import { Uploadlist } from "../../../components/helper/UploadImg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -26,9 +26,9 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { faUser, faClock, faStar } from "@fortawesome/free-solid-svg-icons";
-import Seturl from "../../../Components/helper/SetURL";
-import { AlertSuccess } from "../../../Components/Components/Alert";
-import handle_error from "../../../Components/helper/handle_error";
+import Seturl from "../../../components/helper/SetURL";
+import { AlertSuccess } from "../../../components/components/Alert";
+import handle_error from "../../../components/helper/handle_error";
 function Detail() {
   const [Data, setdata] = useState([]);
   const [itemcollapse, setitemcollapse] = useState([]);
