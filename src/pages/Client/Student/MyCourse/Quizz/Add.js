@@ -34,7 +34,8 @@ function AddQuizz() {
   const handle_Submit_form_create_course = async (values) => {
     const splitQuestion = question.split("***");
     const customQuestion = splitQuestion.map((item) => {
-      const newitem = item.split("\n");
+      let newitem = item.split("\n");
+      newitem = newitem.slice(0, -1); // Bỏ phần tử cuối
       const newquestion = {};
       let check = false;
       let answers = [];

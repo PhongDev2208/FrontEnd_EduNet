@@ -22,7 +22,6 @@ function Material() {
   const [DataMaterial, SetDataMaterial] = useState(null);
   const FetchAPI = async () => {
     const Respond = await GetAllMaterial(id);
-    console.log(Respond);
     if (Respond.status == true) {
       SetDataMaterial(Respond.data);
     }
@@ -110,17 +109,16 @@ function Material() {
                     <div>
                       {" "}
                       {itemchild.file.map((itemlink, linkIndex) => {
-                        console.log(itemlink);
                         return (
                           <a key={linkIndex} target="blank" href={itemlink}>
                             Link Material {index + 1}
                           </a>
                         );
                       })}
-                      {itemchild.Link != null && (
+                      {itemchild.link != null && (
                         <div>
                           {" "}
-                          <a key={index} target="blank" href={itemchild.Link}>
+                          <a key={index} target="blank" href={itemchild.link}>
                             Link Video
                           </a>
                         </div>

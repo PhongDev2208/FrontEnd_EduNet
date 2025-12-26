@@ -27,11 +27,10 @@ function Answer() {
     const Respond = await GetAllAnswers(id);
     if (Respond.status === true && Respond.data.length > 0) {
       const Newdata = Respond.data.map((item, index) => {
-        const date = new Date(parseInt(item.date));
         return {
           key: item.id ? item.id : `item-${index}`,
           stt: index + 1,
-          date: date.toLocaleString(),
+          date: item.date,
           result: (
             <Link
               style={{ marginLeft: "7px" }}

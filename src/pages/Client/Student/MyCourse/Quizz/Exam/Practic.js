@@ -59,7 +59,6 @@ function Practics() {
   useEffect(() => {
     fetchAPI();
   }, []);
-  console.log(DataQuestion.length);
   return (
     <div>
       <div className="shopping-area pt-100 pb-100">
@@ -67,7 +66,6 @@ function Practics() {
           <Form name="basic" onFinish={handle_Mycourse_submit_quizz}>
             {DataQuestion.length > 0 &&
               DataQuestion.map((item, index) => {
-                console.log(item.type);
 
                 return (
                   <Row
@@ -103,7 +101,7 @@ function Practics() {
                                     </Radio>
                                   );
                                 }
-                              )}{" "}
+                              )}
                             </Radio.Group>
                           ) : (
                             <Checkbox.Group

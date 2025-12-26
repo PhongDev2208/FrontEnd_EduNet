@@ -54,7 +54,7 @@ function MyCourse() {
     } else {
       respond = await GetMycourse_course();
     }
-    console.log(respond);
+    
     if (respond.status == true && Array.isArray(respond.data)) {
       let newdata = [];
       newdata = respond.data.map((item, index) => {

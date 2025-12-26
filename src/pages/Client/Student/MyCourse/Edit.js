@@ -35,7 +35,6 @@ function EditMycourse() {
 
   const FetchAPI = async () => {
     const Respond = await Getdetailcourse(id);
-    console.log(Respond);
     if (Respond.status == true) {
       setDatacourse(Respond.data);
     }
@@ -81,7 +80,6 @@ function EditMycourse() {
     const schedulesplit = schedule.split("***");
     const newschedule = schedulesplit.map((item) => {
       const splititem = item.split("\n");
-      console.log(splititem);
       let check = false;
       let tmp = {
         title: null,

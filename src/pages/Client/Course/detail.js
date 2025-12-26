@@ -44,7 +44,6 @@ function Detail() {
     if (dataReview.status == true && Array.isArray(dataReview.data)) {
       setdata(dataReview);
     }
-    console.log("data detail nè", dataDetail);
     if (dataDetail.status == true && dataDetail.data) {
       setDataDetailcourse(dataDetail.data);
       if (Array.isArray(dataDetail.data.schedule)) {

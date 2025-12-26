@@ -32,7 +32,6 @@ function Quizz() {
 
   const fetchAPI = async () => {
     const Respond = await GetAllTopic(id);
-    console.log(Respond);
     if (Respond.status === true) {
       const Newdata = Respond.data.map((item, index) => {
         return {

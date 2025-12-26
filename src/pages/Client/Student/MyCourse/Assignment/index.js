@@ -35,7 +35,7 @@ function Assignment() {
       ? [
           {
             title: "Check",
-            dataIndex: "Check",
+            dataIndex: "check",
           },
         ]
       : []),
@@ -50,14 +50,14 @@ function Assignment() {
           title: item.title,
           start_time: item.time.start_display,
           end_time: item.time.end_display,
-          Link: (
+          link: (
             <Button type="primary">
               <Link to={`/Mycourse/Assignment/detail/${id}/${item._id}`}>
                 Open
               </Link>
             </Button>
           ),
-          Check: role === "tea" && (
+          check: role === "tea" && (
             <Button type="primary">
               <Link to={`/Mycourse/Assignment/check/${id}/${item._id}`}>
                 Check

@@ -9,7 +9,6 @@ function Checkdetail() {
   const [DataCheck, SetDatacheck] = useState(null);
   const FetchAPI = async () => {
     const Respond = await GetdetailSubmit(idchild);
-    console.log(Respond);
     if (Respond.status == true) {
       SetDatacheck(Respond.data);
     }

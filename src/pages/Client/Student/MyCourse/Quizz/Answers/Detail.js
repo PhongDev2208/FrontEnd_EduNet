@@ -21,11 +21,9 @@ function DetailAnswer() {
   const token = useSelector(selectUser);
   const fetchAPI = async () => {
     const Respond = await GetDetailAnswer(id);
-    console.log(Respond);
     if (Respond.status === true) {
       SetDataAnswers(Respond.data);
     }
-    console.log(DataAnswers);
   };
   useEffect(() => {
     fetchAPI();
@@ -64,7 +62,6 @@ function DetailAnswer() {
                             style={{ display: "flex", flexDirection: "column" }}
                           >
                             {item.answers.map((itemchildren, indexchildren) => {
-                              console.log(item);
                               return item.correct_answers[0] !=
                                 indexchildren + 1 &&
                                 item.answersuser[0] != indexchildren + 1 ? (
@@ -102,7 +99,6 @@ function DetailAnswer() {
                                 (itemcheckquestion) =>
                                   indexchildren + 1 == itemcheckquestion
                               );
-                              console.log(checkuser, checkquestion);
                               return checkuser == false &&
                                 checkquestion == false ? (
                                 <Checkbox style={{ marginBottom: "15px" }}>

@@ -23,7 +23,6 @@ function DetailAssignment() {
 
   const FetchAPI = async () => {
     const Respond = await GetdetailAssignment(idas);
-    console.log(Respond);
     if (Respond.status == true) {
       setnewdata(Respond.data);
     }
